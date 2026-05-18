@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -27,7 +28,7 @@ func (v *Validator) Required(field, value string) *Validator {
 // MinLength checks minimum string length.
 func (v *Validator) MinLength(field, value string, min int) *Validator {
 	if len(value) < min {
-		v.errors = append(v.errors, field+" must be at least "+string(rune(min))+" characters")
+		v.errors = append(v.errors, fmt.Sprintf("%s must be at least %d characters", field, min))
 	}
 	return v
 }
@@ -35,7 +36,7 @@ func (v *Validator) MinLength(field, value string, min int) *Validator {
 // MaxLength checks maximum string length.
 func (v *Validator) MaxLength(field, value string, max int) *Validator {
 	if len(value) > max {
-		v.errors = append(v.errors, field+" must be at most "+string(rune(max))+" characters")
+		v.errors = append(v.errors, fmt.Sprintf("%s must be at most %d characters", field, max))
 	}
 	return v
 }
